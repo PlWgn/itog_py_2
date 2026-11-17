@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Блог{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Главная</a>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('create_post') }}">Новый пост</a>
+        <span>Пользователь: {{ current_user.username }}</span>
+        <form class="inline" action="{{ url_for('logout') }}" method="POST">
+            <button type="submit">Выйти</button>
+        </form>
+        {% else %}
+        <a href="{{ url_for('login') }}">Вход</a>
+        <a href="{{ url_for('register') }}">Регистрация</a>
+        {% endif %}
+    </nav>
+    <hr>
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+    <p class="{{ category }}">{{ message }}</p>
+    {% endfor %}
+    {% block content %}{% endblock %}
+</body>
+</html>

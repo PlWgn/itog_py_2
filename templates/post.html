@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p class="info">{{ post.author.username }}, {{ post.created.strftime('%d.%m.%Y %H:%M') }}</p>
+<p class="text">{{ post.text }}</p>
+{% if current_user == post.author %}
+<a href="{{ url_for('edit_post', post_id=post.id) }}">Редактировать</a>
+<form class="inline" action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+    <button type="submit">Удалить</button>
+</form>
+{% endif %}
+<p><a href="{{ url_for('index') }}">К списку постов</a></p>
+{% endblock %}

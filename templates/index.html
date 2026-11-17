@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Блог: все посты{% endblock %}
+
+{% block content %}
+<h1>Все посты</h1>
+{% if posts.items %}
+{% for post in posts.items %}
+<div class="post">
+    <h2><a href="{{ url_for('show_post', post_id=post.id) }}">{{ post.title }}</a></h2>
+    <p class="info">{{ post.author.username }}, {{ post.created.strftime('%d.%m.%Y %H:%M') }}</p>
+    <p>{{ post.text|truncate(200) }}</p>
+</div>
+{% endfor %}
+{% else %}
+<p>Постов пока нет.</p>
+{% endif %}
+{% if posts.pages > 1 %}
+<p>
+    {% if posts.has_prev %}
+    <a href="{{ url_for('index', page=posts.prev_num) }}">Назад</a>
+    {% endif %}
+    Страница {{ posts.page }} из {{ posts.pages }}
+    {% if posts.has_next %}
+    <a href="{{ url_for('index', page=posts.next_num) }}">Вперед</a>
+    {% endif %}
+</p>
+{% endif %}
+{% endblock %}

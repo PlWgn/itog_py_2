@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 10px;
+}
+
+nav a, nav span, nav form {
+    margin-right: 10px;
+}
+
+.inline {
+    display: inline;
+}
+
+label, input, textarea {
+    display: block;
+}
+
+input, textarea {
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.post {
+    border-bottom: 1px solid gray;
+}
+
+.info {
+    color: gray;
+    font-size: 14px;
+}
+
+.text {
+    white-space: pre-line;
+}
+
+.success {
+    color: green;
+}
+
+.danger, .warning {
+    color: red;
+}
